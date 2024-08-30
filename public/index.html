@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car CRUD API</title>
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"
+        integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+        crossorigin="anonymous"></script>
+    <script src="./index.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="heading">CAR CRUD API</div>
+
+    <div x-data="carAPI" x-init="init">
+        <section class="sec1">
+            <div class="subheading">LIST OF CARS</div>
+            <button @click="showCarsList = !showCarsList">Car List</button>
+            <div x-show="showCarsList">
+                <ul>
+                    <template x-for="car in cars" :key="car.reg_number">
+                        <li x-text="`${car.make} ${car.model} (${car.color}) - ${car.reg_number}`"></li>
+                    </template>
+                </ul>
+            </div>
+        </section>
+
+        <section class="sec2">
+            <div class="subheading">NUMBER OF CARS PER MODEL</div>
+            <div class="description">LIST OF CARS WITH A SPECIFIC COLOR AND MODEL IN A SPECIFIED TOWN</div>
+            <div>
+                <select x-model="color" id="color" name="color">
+                    <option value="">Select Colour</option>
+                    <option value="white">White</option>
+                    <option value="red">Red</option>
+                    <option value="orange">Orange</option>
+                    <option value="blue">Blue</option>
+                    <option value="green">Green</option>
+                </select>
+                <select x-model="model" id="model" name="model">
+                    <option value="">Select Model</option>
+                    <template x-for="car in uniqueModels()" :key="car.model">
+                        <option x-text="car.model" :value="car.model"></option>
+                    </template>
+                </select>
+                <select x-model="town" id="town" name="town">
+                    <option value="">Select Town</option>
+                    <option value="Bellville">Bellville</option>
+                    <option value="Cape Town">Cape Town</option>
+                    <option value="Kuilsriver">Kuilsriver</option>
+                    <option value="Malmesbury">Malmesbury</option>
+                    <option value="Paarl">Paarl</option>
+                    <option value="Stellenbosch">Stellenbosch</option>
+                </select>
+                <button @click="fetchCars">Search</button>
+            </div>
+            <div>
+                <ul>
+                    <template x-for="car in cars" :key="car.reg_number">
+                        <li x-text="`${car.make} ${car.model} (${car.color}) - ${car.reg_number}`"></li>
+                    </template>
+                </ul>
+                <div x-text="message"></div>
+            </div>
+            <button @click="resetCarsSearch">Reset</button>
+        </section>
+
+        <section class="sec3">
+            <div class="subheading">CREATE</div>
+            <div>
+                <input type="text" placeholder="Color" x-model="newCar.color" id="create-color" name="color">
+                <input type="text" placeholder="Make" x-model="newCar.make" id="create-make" name="make">
+                <input type="text" placeholder="Model" x-model="newCar.model" id="create-model" name="model">
+                <input type="text" placeholder="Registration Number" x-model="newCar.reg_number" id="create-reg_number" name="reg_number">
+                <button @click="createCar">Add Car</button>
+            </div>
+            <button @click="resetNewCar">Reset</button>
+        </section>
+
+        <section class="sec4">
+            <div class="subheading">UPDATE</div>
+            <div>
+                <input type="text" placeholder="Registration Number" x-model="updateCarReg" id="update-reg_number" name="reg_number">
+                <input type="text" placeholder="Color" x-model="updateCar.color" id="update-color" name="color">
+                <input type="text" placeholder="Make" x-model="updateCar.make" id="update-make" name="make">
+                <input type="text" placeholder="Model" x-model="updateCar.model" id="update-model" name="model">
+                <button @click="updateCarData">Update Car</button>
+            </div>
+            <button @click="resetUpdateCar">Reset</button>
+        </section>
+
+        <section class="sec5">
+            <div class="subheading">DELETE</div>
+            <div>
+                <input type="text" placeholder="Registration Number" x-model="deleteCarReg" id="delete-reg_number" name="reg_number">
+                <button @click="deleteCarData">Delete Car</button>
+            </div>
+            <button @click="resetDeleteCar">Reset</button>
+        </section>
+
+    </div>
+</body>
+</html>

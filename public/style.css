@@ -1,0 +1,53 @@
+body {
+    background-image: url(./background.jpg);
+    padding: 2em;
+}
+
+.heading {
+    background-color: #1D242A;
+    margin: 1em;
+    margin-left: 5em;
+    margin-right: 5em;
+    color: white;
+    text-align: center;
+    text-decoration: underline;
+    font-weight: bolder;
+    font-size: xx-large;
+}
+
+.sec1, .sec2, .sec3, .sec4, .sec5 {
+    margin: 1em;
+    padding: 1em;
+}
+
+.subheading {
+    color: black;
+    text-align: center;
+    text-decoration: underline;
+    font-weight: bolder;
+    font-size: larger;
+}
+
+.description {
+    font-size: small;
+}
+
+.sec1 {
+    background-color: #B4B6A8;
+}
+
+.sec2 {
+    background-color: #858F8A;
+}
+
+.sec3 {
+    background-color: #658286;
+}
+
+.sec4 {
+    background-color: #616467;
+}
+
+.sec5 {
+    background-color: #344E66;
+}

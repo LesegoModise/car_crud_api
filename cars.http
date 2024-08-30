@@ -1,0 +1,26 @@
+GET http://localhost:3000/api/carsPerModel?color=orange&model=Tazz&town=Bellville HTTP/1.1
+
+###
+POST http://localhost:3000/api/cars HTTP/1.1
+Content-Type: : application/json
+
+{
+    "color": "green",
+    "make": "Honda",
+    "model": "Civic",
+    "reg_number": "CY 123455"
+}
+
+###
+PUT http://localhost:3000/api/cars/CY 12345 HTTP/1.1
+Content-Type: : application/json
+
+{
+    "color": "blue",
+    "make": "Honda",
+    "model": "Civic",
+    "reg_number": "CY 123455"
+}
+
+###
+DELETE http://localhost:3000/api/cars/CY 12345 HTTP/1.1
